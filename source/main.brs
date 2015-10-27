@@ -34,7 +34,7 @@ Sub PlayContentWithAds(videoContent as Object)
     adIface = Roku_Ads()
     print "Roku_Ads library version: " + adIface.getLibVersion()
     ' Normally, would set publisher's ad URL here.  Otherwise uses default Roku ad server (with single preroll placeholder ad)
-    adIface.setAdUrl("http://vcdn.fuiszmedia.com/8a67985988e82004593a94f9/video.mp4")
+    adIface.setAdUrl("http://experiences.fuiszmedia.com/56252871e7d1690300cc0217/preview.html")
 
     adPods = adIface.getAds()
     playContent = adIface.showAds(adPods) ' show preroll ad pod (if any)
