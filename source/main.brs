@@ -29,10 +29,35 @@ Function PlayVideoContent(content as Object) as Object
   return videoScreen
 End Function
 
+' Everything runs through here
 Sub PlayContentWithAds(videoContent as Object)
   ' Create a canvas for the loading state
   canvas = CreateObject("roImageCanvas")
   canvas.SetLayer(1, {color: "#000000"})
   canvas.SetLayer(2, {text: "Loading..."})
   canvas.Show()
+
+  ' Load the Roku ads library
+  adIface = Roku_Ads()
+  ' Print the version of the ad library
+  print "Roku_Ads Library version: " + adIface.getLibraryVersion()
+
+  'Set the publisher ad URL
+  adIface.setAdUrl()
+
+  ' Get the ads
+  adPods = adIface.getAds()
+  playContent = adIface.showAds(adPods) ' show preroll ad pod (if any)
+
+  curPos = 0
+
+  ' If the playContent exists, play the  video
+  if playContent
+    videoScreen = PlayVideoContent(videoContent)
+  end if
+
+  ' Set defaults
+  closingContentScreen = false
+  contentDone = false
+
 End Sub
